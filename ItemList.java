@@ -17,18 +17,26 @@ public class ItemList extends Item {
 		return price;
 	}
 
-	@Override
+	@Override 
 	public double getPrice(String itemName) {
 		double price = -999;
-		for (Item i : itemList) {
-			if (i.getName().equals(itemName)) {
-				price = i.getPrice();
+		for (Item i : this.itemList) {
+			if (i.getName().equals(itemName))
+				return i.getPrice();
+			else {
+				if (i.getClass().equals(this.getClass())) {
+					i.getPrice(itemName);
+				}
 			}
+			return price;
+		}
+		for (Item i : itemList) {
+			price = i.getPrice(itemName);
 		}
 		return price;
 	}
-	
-	public void add(Item i){
+
+	public void add(Item i) {
 		this.itemList.add(i);
 	}
 

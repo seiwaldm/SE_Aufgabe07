@@ -8,20 +8,21 @@ public class Book extends Item{
 		super(name);
 		this.setPrice(price);
 		this.setIsbn(isbn);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double getPrice() {
-		// TODO Auto-generated method stub
-		return 0;
+		return price;
 	}
 
 	@Override
 	public double getPrice(String itemName) {
-		// TODO Auto-generated method stub
-		return 0;
+		double price = -999;
+		if (itemName.equals(this.getName()))
+			price = this.getPrice();
+		return price;
 	}
+	
 
 	public Integer getIsbn() {
 		return isbn;
