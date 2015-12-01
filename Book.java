@@ -1,13 +1,32 @@
+/**
+ * PS Software Engineering WS2015 <br>
+ * <br>
+ * 
+ * Class to manage Book-Items
+ * 
+ * @author Kevin Schoergnhofer
+ * @author Markus Seiwald
+ */
+public class Book extends Item {
 
-public class Book extends Item{
-	
-	private Double price;
-	private Integer isbn;
+	private double price;
+	private int isbn;
 
-	public Book(String name, Double price, Integer isbn) {
+	/**
+	 * Constructs a new Book with specified name, price and identification
+	 * number.
+	 * 
+	 * @param name
+	 *            Book title
+	 * @param price
+	 *            Book price
+	 * @param isbn
+	 *            Book identification number
+	 */
+	public Book(String name, double price, int isbn) {
 		super(name);
-		this.setPrice(price);
-		this.setIsbn(isbn);
+		this.price = price;
+		this.isbn = isbn;
 	}
 
 	@Override
@@ -16,24 +35,19 @@ public class Book extends Item{
 	}
 
 	@Override
-	public double getPrice(String itemName) {
-		double price = -999;
+	public Double getPrice(String itemName) {
 		if (itemName.equals(this.getName()))
-			price = this.getPrice();
-		return price;
+			return this.getPrice();
+		else
+			return null;
 	}
-	
 
-	public Integer getIsbn() {
+	/**
+	 * gets the identification number of the Book
+	 * 
+	 * @return the Book identification number
+	 */
+	public int getIsbn() {
 		return isbn;
 	}
-
-	public void setIsbn(Integer isbn) {
-		this.isbn = isbn;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
 }

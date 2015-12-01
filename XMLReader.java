@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -12,23 +11,41 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ * PS Software Engineering WS2015 <br>
+ * <br>
+ * 
+ * Class that reads from an XML-Input and creates a hierarchy of Item-Objects
+ * from it
+ * 
+ * @author Kevin Schoergnhofer
+ * @author Markus Seiwald
+ */
 public class XMLReader {
 
 	ItemList rootList;
 
+	/**
+	 * Constructs a new XMLReader AND instantiates Item-Objects.
+	 * 
+	 * @param filename
+	 *            the filename of the XML-input
+	 */
 	public XMLReader(String filename)
 			throws ParserConfigurationException, SAXException, IOException {
 
+		// create a new document from the input file:
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder reader = factory.newDocumentBuilder();
 		FileInputStream input = new FileInputStream(filename);
 		Document doc = reader.parse(input);
 
-		// nehme fürs erste an, dass das root-element immer eine Liste ist (und
-		// keine Buch oder CD...):
+		// take root element and create a list of child nodes:
 		Element root = doc.getDocumentElement();
 		NodeList rootChildren = root.getChildNodes();
+		// suppose the root element is a list and create a new instance:
 		this.rootList = new ItemList(root.getAttribute("name"));
+		// scan children of root list:
 		scan(rootChildren, rootList);
 	}
 
@@ -37,6 +54,9 @@ public class XMLReader {
 			Node tempNode = currentList.item(i);
 			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 				Element item = (Element) tempNode;
+
+				// create a new Book, CD or ItemList.
+				// if element is an ItemList call scan-method recursively
 				if (item.getTagName().equals("book")) {
 					Book newBook = new Book(item.getAttribute("name"),
 							Double.parseDouble(item.getAttribute("price")),

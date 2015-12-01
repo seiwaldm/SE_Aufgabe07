@@ -1,11 +1,28 @@
+/**
+ * PS Software Engineering WS2015 <br>
+ * <br>
+ * 
+ * Class to manage CD-Items
+ * 
+ * @author Kevin Schoergnhofer
+ * @author Markus Seiwald
+ *
+ */
+public class CD extends Item {
 
-public class CD extends Item{
-	
-	private Double price;
+	private double price;
 
-	public CD(String name, Double price) {
+	/**
+	 * Constructs a new CD with specified name and price.
+	 * 
+	 * @param name
+	 *            CD title
+	 * @param price
+	 *            CD price
+	 */
+	public CD(String name, double price) {
 		super(name);
-		this.setPrice(price);
+		this.price = price;
 	}
 
 	@Override
@@ -14,15 +31,10 @@ public class CD extends Item{
 	}
 
 	@Override
-	public double getPrice(String itemName) {
-		double price = -999;
+	public Double getPrice(String itemName) {
 		if (itemName.equals(this.getName()))
-			price = this.getPrice();
-		return price;
+			return this.getPrice();
+		else
+			return null;
 	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
 }
